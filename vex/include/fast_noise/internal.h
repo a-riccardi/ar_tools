@@ -1,11 +1,14 @@
 #ifndef __fast_noise_internal__
 #define __fast_noise_internal__
 
-/* This module contains the implementation of the various noise_func functions to help with OpenCL porting.
-It also implements some noise_func types available in Gaea that have no native Houdini implementation
+/* This module contains the actual implementation of the noise function called in fast_noise/api.h
+The general module struct is as follows:
+    -definition of utils functions
+    -definition of basic noise func
+    -macro for fractal generation
+    -macro for cellular function 
+    -actual function declaration with macro usage
 */
-
-//#include "gaea/globals.h"
 
 #define HASH_TO_FLOAT (1.0f / 2147483648.0f)
 #define X_PRIME (1619)
