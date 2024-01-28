@@ -30,6 +30,7 @@ function int[] X_GRAD() { int grad[] = { 0,-1, 0, 1, 0, 0, 0, 0,-1, 1,-1, 1,-1, 
 function int[] Y_GRAD() { int grad[] = {-1, 1,-1, 1,-1, 1,-1, 1, 0, 0, 0, 0,-1,-1, 1, 1 }; return grad; }
 function int[] Z_GRAD() { int grad[] = {-1, 0, 1, 0,-1,-1, 1, 1,-1,-1, 1, 1, 0, 0, 0, 0 }; return grad; }
 
+// per-component implementation of >= operation
 function float   greater_equal(const float   a; const float   b) { return a >= b; }
 function vector2 greater_equal(const vector2 a; const vector2 b) { return set(a.x >= b.x, a.y >= b.y); }
 function vector  greater_equal(const vector  a; const vector  b) { return set(a.x >= b.x, a.y >= b.y, a.z >= b.z); }

@@ -9,17 +9,6 @@ required checks and calls the appropriate implementation, contained in the
 
 #include "internal.h" 
 
-/*#define NTYPE_VALUE           (0)
-#define NTYPE_VALUE_FRACTAL   (1)
-#define NTYPE_PERLIN          (2)
-#define NTYPE_PERLIN_FRACTAL  (3)  
-#define NTYPE_SIMPLEX         (4)
-#define NTYPE_SIMPLEX_FRACTAL (5)
-#define NTYPE_WHITE_NOISE     (6)
-#define NTYPE_CELLULAR        (7)
-#define NTYPE_CUBIC           (8)
-#define NTYPE_CUBIC_FRACTAL   (9)*/
-
 /* Enum for different noise type */
 #define NTYPE_DO_FRACTAL  (1)
 #define NTYPE_VALUE       (2)
@@ -49,13 +38,6 @@ required checks and calls the appropriate implementation, contained in the
 #define CTYPE_DISTANCE_2_MUL  (6)
 #define CTYPE_DISTANCE_2_DIV  (7)
 #define CTYPE_DISTANCE_2_CAVE (8) 
-
-/*#define PTYPE_NONE                       (0)
-#define PTYPE_GRADIENT                   (1)
-#define PTYPE_GRADIENT_FRACTAL           (2)
-#define PTYPE_NORMALIZE                  (3)
-#define PTYPE_GRADIENT_NORMALIZE         (4)
-#define PTYPE_GRADIENT_FRACTAL_NORMALIZE (5)*/
 
 /* Enum for different perturbation type */
 #define PTYPE_NONE             (0)
@@ -131,12 +113,14 @@ struct noise_settings {
         perturbation_amplitude = 1.0f;
         perturbation_octaves = 1;
         perturbation_lacunarity = 2.01234f;
-        perturbation_gain = 1.0f;
-        perturbation_normalized_length = 1_000_000.0f;
+        perturbation_gain = 1.0f;                     
+        perturbation_normalized_length = 1_000_000.0f; 
     }
 
     string to_string()
     {
+        /* Utility function to print all noise settings values, useful for debugging */
+
         function string noise_type_to_str(const int ntype)
         {
             string values[] = { "VALUE", "PERLIN", "SIMPLEX", "CUBIC", "WHITE_NOISE", "CELLULAR" };
@@ -264,6 +248,7 @@ struct noise_settings {
         }  
 
         P_noise *= axis_scale * frequency;
+
         if(is_flag_set(noise_type, NTYPE_WHITE_NOISE)) { n = white_noise(P_noise, seed); }
         else if(is_flag_set(noise_type, NTYPE_VALUE))
         {
