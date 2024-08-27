@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "**/ocl/**/*.h": "opencl",
+        "**/vex/**/*.h": "vex",
+        "**/python/**/*.py": "python",
+    },
+    "OpenCL.formatting.name": "none"
+}
