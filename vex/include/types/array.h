@@ -1,9 +1,9 @@
-/* Utility library to work with arrays */
-
 #ifndef __types_array__
 #define __types_array__
 
-function void intersect(string a[]; string b[]; export string result[])
+/* Utility library to work with arrays */
+
+function void intersect(const string a[]; const string b[]; export string result[])
 {
     /* Computes the intersection between string arrays a and b and return the result */
     
@@ -28,7 +28,7 @@ function void intersect(string a[]; string b[]; export string result[])
     }
 }
 
-function void shuffle(int a[]; float seed)
+function void shuffle(int a[]; const float seed)
 {
     /* In-place shuffle array components in a random fashion */
 
@@ -52,7 +52,7 @@ function void shuffle(int a[]; float seed)
     }
 }
 
-function void merge(export int dst[]; int src[])
+function void merge(export int dst[]; const int src[])
 {
     /* Merge src into dst ensuring no duplicate items are added to dst.
     The function is optimized for small src incrementally added to a growing dst array

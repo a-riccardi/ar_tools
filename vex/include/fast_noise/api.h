@@ -7,7 +7,7 @@ required parameters. This struct exposes a 'get_noise' function that performs
 required checks and calls the appropriate implementation, contained in the
 'internal' module included below */
 
-#include "internal.h" 
+#include "fast_noise/internal.h" 
 
 /* Enum for different noise type */
 #define NTYPE_DO_FRACTAL  (1)

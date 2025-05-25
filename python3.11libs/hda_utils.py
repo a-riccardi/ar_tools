@@ -17,7 +17,7 @@ def get_input_geo(node: hou.Node, input_idx: int = 0) -> hou.Geometry:
     """Given a node (usually from kwargs["node"]) returns the input geometry"""
     try:
         return node.input(input_idx).geometry()
-    except hou.AttributeError as e:
+    except AttributeError as e:
         return None
 
 
@@ -124,6 +124,41 @@ def build_names_menu(geo: hou.Geometry) -> list[str]:
         return []
 
     return [name for name in geo.primStringAttribValues("name") for _ in range(2)]
+
+
+def build_heightfield_menu(
+    geo: hou.Geometry, include_vector_layer: bool = True
+) -> list[str]:
+    """Returns a token, label entry with all heightfield layer names
+    If vector layers are detected (e.g. N.x, N.y, N.z) create an extra N.*
+    menu entry that can be used to reference all components
+    """
+
+    if geo is None:
+        return []
+
+    menu_list = []
+    for prim in geo.prims():
+        if prim.type() != hou.primType.Volume:
+            continue
+        if prim.resolution()[2] != 1:
+            continue
+
+        hf_name = prim.stringAttribValue("name")
+        if len(hf_name) < 1:
+            continue
+
+        hf_name_parts = hf_name.rpartition(".")
+        if include_vector_layer and len(hf_name_parts[1]) > 0:
+            # NOTE: this will generate a 'layer.*' for each layer component
+            vector_layer = f"{hf_name_parts[0]}.*"
+            menu_list.append(vector_layer)
+
+        menu_list.append(hf_name)
+
+    # 1) casting the menu_list into a set to remove 'layer.*' duplicates
+    # 2) sorting with case-insensitive to return a sensible menu
+    return [name for name in sorted(set(menu_list), key=str.casefold) for _ in range(2)]
 
 
 def build_group_menu(

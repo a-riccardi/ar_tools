@@ -34,10 +34,10 @@ function int[] Y_GRAD() { int grad[] = {-1, 1,-1, 1,-1, 1,-1, 1, 0, 0, 0, 0,-1,-
 function int[] Z_GRAD() { int grad[] = {-1, 0, 1, 0,-1,-1, 1, 1,-1,-1, 1, 1, 0, 0, 0, 0 }; return grad; }
 
 // per-component implementation of >= operation
-function float   greater_equal(const float   a; const float   b) { return a >= b; }
-function vector2 greater_equal(const vector2 a; const vector2 b) { return set(a.x >= b.x, a.y >= b.y); }
-function vector  greater_equal(const vector  a; const vector  b) { return set(a.x >= b.x, a.y >= b.y, a.z >= b.z); }
-function vector4 greater_equal(const vector4 a; const vector4 b) { return set(a.x >= b.x, a.y >= b.y, a.z >= b.z, a.w >= b.w); }
+function float   g_equal(const float   a; const float   b) { return a >= b; }
+function vector2 g_equal(const vector2 a; const vector2 b) { return set(a.x >= b.x, a.y >= b.y); }
+function vector  g_equal(const vector  a; const vector  b) { return set(a.x >= b.x, a.y >= b.y, a.z >= b.z); }
+function vector4 g_equal(const vector4 a; const vector4 b) { return set(a.x >= b.x, a.y >= b.y, a.z >= b.z, a.w >= b.w); }
 
 function float lerp_cubic(const float a; const float b; const float c; const float d; const float t)
 {
@@ -237,7 +237,7 @@ function float simplex_single(const vector P; const int seed)
     vector4 z4 = set(P0.z, xyz1.z, xyz2.z, xyz3.z);
     vector4 t =  set(0.6f, 0.6f, 0.6f, 0.6f) - (x4 * x4) - (y4 * y4) - (z4 * z4);
 
-    vector4 n = greater_equal(t, set(0.0f, 0.0f, 0.0f, 0.0f));
+    vector4 n = g_equal(t, set(0.0f, 0.0f, 0.0f, 0.0f));
 
     t *= t * t * t;
 

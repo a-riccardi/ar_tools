@@ -76,4 +76,16 @@ function int[] primpoints_ordered(int geo; int primnum; int primpoints[])
     return primpoints_ordered;
 }
 
+function int is_prim_closed(int geo; int primnum)
+{
+    int is_closed = primintrinsic(0, "closed", primnum);
+    if(!is_closed)
+    {
+        int vtx[] = primvertices(geo, primnum);
+        is_closed = vertexpoint(geo, vtx[0]) == vertexpoint(geo, vtx[-1]);
+    }
+
+    return is_closed;
+}
+
 #endif
